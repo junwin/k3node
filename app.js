@@ -219,6 +219,7 @@ bot.dialog('/prompts', [
     },
     function (session, results) {
         session.send("You chose '%s'", results.response.entity);
+        session.endDialog();
         //builder.Prompts.confirm(session, "Prompts.confirm()\n\nSimple yes/no questions are possible. Answer yes or no now.");
     },
     function (session, results) {
