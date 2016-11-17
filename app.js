@@ -111,7 +111,7 @@ bot.use(builder.Middleware.dialogVersion({ version: 1.0, resetCommand: /^reset/i
 // Bots Global Actions
 //=========================================================
 
-bot.endConversationAction('end', 'MeetingEnd :)', { matches: /^end/i });
+bot.endConversationAction('bye', 'Bye :)', { matches: /^bye/i });
 bot.beginDialogAction('help', '/help', { matches: /^help/i });
 
 // Handle changes to the conversation participents
@@ -180,6 +180,11 @@ bot.dialog('/', [
         if(session.message.text == 'start')
         {
             console.log('meeting started:' +  Date());
+        }
+        if(session.message.text == 'end')
+        {
+            console.log('meeting ended:' +  Date());
+            session.beginDialog('/prompts');
         }
         //session.beginDialog('/help');
     },
