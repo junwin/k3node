@@ -229,8 +229,8 @@ bot.dialog('/prompts', [
         builder.Prompts.choice(session, "Prompts.choice()\n\nNow pick an option.", "great|ok|meh", { listStyle: style });
     },
     function (session, results) {
-        session.send("You chose '%s'", results.response.entity);
-        session.endDialog();
+        //session.send("You chose '%s'", results.response.entity);
+        session.endDialog(results.response.entity);
         //builder.Prompts.confirm(session, "Prompts.confirm()\n\nSimple yes/no questions are possible. Answer yes or no now.");
     },
     function (session, results) {
