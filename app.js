@@ -114,6 +114,37 @@ bot.use(builder.Middleware.dialogVersion({ version: 1.0, resetCommand: /^reset/i
 bot.endConversationAction('goodbye', 'Goodbye :)', { matches: /^goodbye/i });
 bot.beginDialogAction('help', '/help', { matches: /^help/i });
 
+// Handle changes to the conversation participents
+bot.on('conversationUpdate', function (message) {
+    if (message.membersAdded) {
+        var membersAdded = message.membersAdded
+            .map((m) => {
+                var isSelf = m.id === message.address.bot.id;
+                return (isSelf ? message.address.bot.name : m.name) + ' (Id: ' + m.id + ')';
+            })
+            .join(', ');
+
+        var reply = new builder.Message()
+            .address(message.address)
+            .text('Welcome ' + membersAdded);
+        bot.send(reply);
+    }
+
+    if (message.membersRemoved) {
+        var membersRemoved = message.membersRemoved
+            .map((m) => {
+                var isSelf = m.id === message.address.bot.id;
+                return (isSelf ? message.address.bot.name : m.name) + ' (Id: ' + m.id + ')';
+            })
+            .join(', ');
+
+        var reply = new builder.Message()
+            .address(message.address)
+            .text('The following members ' + membersRemoved + ' were removed or left the conversation :(');
+        bot.send(reply);
+    }
+});
+
 //=========================================================
 // Bots Dialogs
 //=========================================================

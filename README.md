@@ -25,3 +25,7 @@ The sample has not been published for a general audience - so you cannot search 
 
 It also works with a lot of other channels, http://enablingwebchat.com/, Facebook messenger and so on
 
+
+See  https://docs.botframework.com/en-us/node/builder/chat-reference/modules/_botbuilder_d_.html  for info about the SDK
+
+
