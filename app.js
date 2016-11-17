@@ -37,7 +37,7 @@ var builder = require('./core/');
 
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 8080, function () {
+server.listen(process.env.port || process.env.PORT || 80, function () {
    console.log('%s listening to %s', server.name, server.url); 
 });
   
