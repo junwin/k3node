@@ -2,6 +2,8 @@
 
 This is adapted version of the Microsoft Bot Builder skype demo - see https://github.com/Microsoft/BotBuilder
 
+You will need to have npm installed: https://www.npmjs.com/
+
 git clone https://github.com/junwin/k3node
 cd k3node
 npm install
@@ -14,7 +16,10 @@ You can add this to your own Skype contact list with the following link:
 https://join.skype.com/bot/1adb6c46-d3ad-4a6c-bf2e-edc69df81338
 
 Embedded with 
+
 <a href='https://join.skype.com/bot/1adb6c46-d3ad-4a6c-bf2e-edc69df81338'><img src='https://dev.botframework.com/Client/Images/Add-To-Skype-Buttons.png'/></a>
+
+
 
 The sample has not been published for a general audience - so you cannot search for it from Skype.
 

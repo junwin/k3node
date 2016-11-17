@@ -122,7 +122,7 @@ bot.dialog('/', [
     function (session) {
         // Send a greeting and show help.
         var card = new builder.HeroCard(session)
-            .title("Microsoft Bot Framework")
+            .title("Microsoft Bot Framework - Sykpe for business test bot")
             .text("Your bots - wherever your users are talking.")
             .images([
                  builder.CardImage.create(session, "http://docs.botframework.com/images/demo_bot_image.png")
