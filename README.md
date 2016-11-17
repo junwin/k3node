@@ -5,8 +5,16 @@ This is adapted version of the Microsoft Bot Builder skype demo - see https://gi
 You will need to have npm installed: https://www.npmjs.com/
 
 git clone https://github.com/junwin/k3node
+
 cd k3node
+
 npm install
+
+you can test the bot using: https://download.botframework.com/bf-v3/tools/emulator/publish.htm
+
+use url: http://localhost/api/messages
+use app id  1adb6c46-d3ad-4a6c-bf2e-edc69df81338
+use pwd ViRRhcD9YtjKwo85EFjcXWE
 
 Changes pushed to the repo will be automatically deployed to the Azure cloud at http://k3node.azurewebsites.net
 
