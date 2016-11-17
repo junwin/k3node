@@ -128,6 +128,7 @@ bot.on('conversationUpdate', function (message) {
             .address(message.address)
             .text('Welcome ' + membersAdded);
         bot.send(reply);
+        console.log('Added Members' + membersAdded)
     }
 
     if (message.membersRemoved) {
@@ -142,6 +143,7 @@ bot.on('conversationUpdate', function (message) {
             .address(message.address)
             .text('The following members ' + membersRemoved + ' were removed or left the conversation :(');
         bot.send(reply);
+        console.log('Removed Members' + membersRemoved)
     }
 });
 
@@ -174,6 +176,10 @@ bot.dialog('/', [
         if(session.message.text == 'feedback')
         {
             session.beginDialog('/prompts');
+        }
+        if(session.message.text == 'start')
+        {
+            console.log('meeting started:' +  Date());
         }
         //session.beginDialog('/help');
     },
