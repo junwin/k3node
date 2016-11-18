@@ -210,11 +210,17 @@ bot.dialog('/', [
             console.log('meeting started:' +  Date());
             session.userData.StartedMeeting =  Date();
             
+            
         }
         if(session.message.text == 'end')
         {
             console.log('meeting ended:' +  Date());
-            session.send('meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting);
+            
+            session.userData.EndedMeeting =  Date();
+            x = Date.parse(session.userData.EndedMeeting);
+            y = Date.parse(session.userData.StartedMeeting);
+            var elpased = x -  y;
+            session.send('meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting + ' elapsed:' + (x-y)/60000);
             session.beginDialog('/prompts');
         }
         //session.beginDialog('/help');
