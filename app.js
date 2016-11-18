@@ -163,9 +163,11 @@ bot.use({
                 console.log('Message Received: ', session.message.text);
                
             }
+            console.log('Message Received: ', session.message.text);
              if(session.message.text.indexOf('@k3node')>=0)   {
                     session.message.text = session.message.text.substring(8);
              }
+             console.log('Message Received: ', session.message.text);
             next();
         }
     }
