@@ -50,7 +50,7 @@ var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
 
-//=========================================================
+//==========.===============================================
 // Activity Events
 //=========================================================
 
@@ -206,11 +206,15 @@ bot.dialog('/', [
         }
         if(session.message.text == 'start')
         {
+            session.send('meeting timer is started:' + Date());
             console.log('meeting started:' +  Date());
+            session.userData.StartedMeeting =  Date();
+            
         }
         if(session.message.text == 'end')
         {
             console.log('meeting ended:' +  Date());
+            session.send('meeting timer is ended:' + Date(), + " : " + session.userData.StartedMeeting);
             session.beginDialog('/prompts');
         }
         //session.beginDialog('/help');
@@ -246,7 +250,7 @@ bot.dialog('/menu', [
 
 bot.dialog('/help', [
     function (session) {
-        session.endDialog("Global commands that are available anytime:\n\n* bill - Show the current meeting bill.\n* goodbye - End this conversation.\n* help - Displays these commands.");
+        session.endDialog("Global commands that are available anytime:\n\n* bill - Show the current meeting bill.\n* bye - End this conversation.\n* end - End meeting.\n*  start - Start meeting.\n* help - Displays these commands.");
     }
 ]);
 
