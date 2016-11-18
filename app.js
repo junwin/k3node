@@ -192,35 +192,31 @@ bot.dialog('/', [
         //session.send(msg);
         //session.send("Hi... I'm the Microsoft Bot Framework demo for the Hackathon. I can show you everything you can use our Bot Builder SDK to do on Skype.");
         //session.send("Hi... I'm the Microsoft Bot Framework demo for the Hackathon. Type help  for more info.");
-        if(session.message.text == 'help')
+        if(session.message.text.toLowerCase() == 'help')
         {
             session.beginDialog('/help');
         }
-        if(session.message.text == 'bill')
+        if(session.message.text.toLowerCase() == 'bill')
         {
             session.beginDialog('/receipt');
         }
-        if(session.message.text == 'feedback')
+        if(session.message.text.toLowerCase() == 'feedback')
         {
             session.beginDialog('/prompts');
         }
-        if(session.message.text == 'start')
+        if(session.message.text.toLowerCase() == 'start')
         {
             session.send('meeting timer is started:' + Date());
             console.log('meeting started:' +  Date());
-            session.userData.StartedMeeting =  Date();
-            
-            
+            session.userData.StartedMeeting =  Date();      
         }
-        if(session.message.text == 'end')
-        {
-            
-            
+        if(session.message.text.toLowerCase() == 'end')
+        {         
             session.userData.EndedMeeting =  Date();
             x = Date.parse(session.userData.EndedMeeting);
             y = Date.parse(session.userData.StartedMeeting);
-            var elpased = x -  y;
-            var endMsg = 'meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting + ' elapsed:' + (x-y)/60000;
+            z = elapsed(session);
+            var endMsg = 'meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting + ' elapsed:' + z;
             session.send(endMsg);
             console.log(endMsg);
             session.beginDialog('/prompts');
@@ -281,6 +277,14 @@ bot.dialog('/prompts', [
     }
 ]);
 
+function elapsed(session)
+{
+    session.userData.EndedMeeting =  Date();
+    x = Date.parse(session.userData.EndedMeeting);
+    y = Date.parse(session.userData.StartedMeeting);
+    z = (x -  y)/3600000;
+    return z.toFixed(3);
+}
 
 bot.dialog('/cards', [
     function (session) {
@@ -321,20 +325,25 @@ bot.dialog('/cards', [
 bot.dialog('/receipt', [
     function (session) {       
         // Send a receipt without images
+        cost1 =  250*elapsed(session);
+        item1 = "Chicago:" + elapsed(session);
+        cost2 =  300*elapsed(session);
+        item2 = "New York:" + elapsed(session);
         msg = new builder.Message(session)
             .attachments([
                 new builder.ReceiptCard(session)
                     .title("Recipient's Name")
                     .items([
-                        builder.ReceiptItem.create(session, "$2200.00", "Chicago"),
-                        builder.ReceiptItem.create(session, "$9999.00", "New York")
+                        
+                        builder.ReceiptItem.create(session, cost1, item1),
+                        builder.ReceiptItem.create(session, cost2, item2)
                     ])
                     .facts([
                         builder.Fact.create(session, "1234567898", "Meeting Id"),
-                        builder.Fact.create(session, "CostCenter", "Delivery Method")
+                        builder.Fact.create(session, "HH1234PRJ", "CostCenter")
                     ])
                     .tax("$0.00")
-                    .total("$12199.00")
+                    .total("$"+(cost1+cost2))
             ]);
         session.endDialog(msg);
     }
