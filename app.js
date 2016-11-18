@@ -165,7 +165,8 @@ bot.use({
             }
             console.log('Message Received: ', session.message.text);
              if(session.message.text.indexOf('@k3node')>=0)   {
-                    session.message.text = session.message.text.substring(8);
+                    var startPos = session.message.text.indexOf('@k3node') + 8;
+                    session.message.text = session.message.text.substring(startPos);
              }
              console.log('Message Received: ', session.message.text);
             next();
