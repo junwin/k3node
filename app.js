@@ -163,12 +163,12 @@ bot.use({
                 console.log('Message Received: ', session.message.text);
                
             }
-            console.log('Message Received: ', session.message.text);
+            //console.log('Message Received: ', session.message.text);
              if(session.message.text.indexOf('@k3node')>=0)   {
                     var startPos = session.message.text.indexOf('@k3node') + 13;
                     session.message.text = session.message.text.substring(startPos);
              }
-             console.log('Message Received: ', session.message.text);
+             //console.log('Message Received: ', session.message.text);
             next();
         }
     }
@@ -214,13 +214,15 @@ bot.dialog('/', [
         }
         if(session.message.text == 'end')
         {
-            console.log('meeting ended:' +  Date());
+            
             
             session.userData.EndedMeeting =  Date();
             x = Date.parse(session.userData.EndedMeeting);
             y = Date.parse(session.userData.StartedMeeting);
             var elpased = x -  y;
-            session.send('meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting + ' elapsed:' + (x-y)/60000);
+            var endMsg = 'meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting + ' elapsed:' + (x-y)/60000;
+            session.send(endMsg);
+            console.log(endMsg);
             session.beginDialog('/prompts');
         }
         //session.beginDialog('/help');
