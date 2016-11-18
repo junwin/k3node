@@ -214,7 +214,7 @@ bot.dialog('/', [
         if(session.message.text == 'end')
         {
             console.log('meeting ended:' +  Date());
-            session.send('meeting timer is ended:' + Date(), + " : " + session.userData.StartedMeeting);
+            session.send('meeting timer is ended:' + Date() + " : " + session.userData.StartedMeeting);
             session.beginDialog('/prompts');
         }
         //session.beginDialog('/help');
