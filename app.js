@@ -161,11 +161,11 @@ bot.use({
         } else {
             if (session.userData.isLogging) {
                 console.log('Message Received: ', session.message.text);
-                if(session.message.text.indexOf('@k3node')>=0)
-                {
-                    session.message.text = session.message.text.substring(8);
-                }
+               
             }
+             if(session.message.text.indexOf('@k3node')>=0)   {
+                    session.message.text = session.message.text.substring(8);
+             }
             next();
         }
     }
@@ -250,7 +250,7 @@ bot.dialog('/help', [
 bot.dialog('/prompts', [
     function (session, results) {
         var style = builder.ListStyle.button;
-        builder.Prompts.choice(session, "Prompts.choice()\n\nNow pick an option.", "great|ok|meh", { listStyle: style });
+        builder.Prompts.choice(session, "Hey what did you think of the meeting?", "great|ok|meh", { listStyle: style });
     },
     function (session, results) {
         //session.send("You chose '%s'", results.response.entity);
