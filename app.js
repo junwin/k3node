@@ -147,6 +147,30 @@ bot.on('conversationUpdate', function (message) {
     }
 });
 
+
+// Install logging middleware
+
+bot.use({
+    botbuilder: function (session, next) {
+        if (/^\/log on/i.test(session.message.text)) {
+            session.userData.isLogging = true;
+            session.send('Logging is now turned on');
+        } else if (/^\/log off/i.test(session.message.text)) {
+            session.userData.isLogging = false;
+            session.send('Logging is now turned off');
+        } else {
+            if (session.userData.isLogging) {
+                console.log('Message Received: ', session.message.text);
+                if(session.message.text.indexOf('@k3node')>=0)
+                {
+                    session.message.text = session.message.text.substring(8);
+                }
+            }
+            next();
+        }
+    }
+});
+
 //=========================================================
 // Bots Dialogs
 //=========================================================
@@ -232,9 +256,8 @@ bot.dialog('/prompts', [
         //session.send("You chose '%s'", results.response.entity);
         //session.endDialog(results.response.entity);
         //results.entity.text;
-        results.response.entity.text = 'meh';
         session.endDialog();
-        console.log('option chosen' + results.response.entity);
+        console.log('option chosen:' + results.response.entity);
         //builder.Promp.ts.confirm(session, "Prompts.confirm()\n\nSimple yes/no questions are possible. Answer yes or no now.");
     },
     function (session, results) {
